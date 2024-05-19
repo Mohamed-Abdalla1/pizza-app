@@ -1,13 +1,13 @@
 import 'package:user_repository/src/entities/user_entity.dart';
 
 class MyUser {
-  final String userId;
+   String userId;
   final String email;
   final String name;
   final bool cartIsActive;
 
   MyUser({
-    required this.userId,
+  required   this.userId,
     required this.email,
     required this.name,
     required this.cartIsActive,

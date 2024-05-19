@@ -11,7 +11,7 @@ class UserEntity {
     required this.cartIsActive,
   });
 
-  Map<String, dynamic?> toDocument() {
+  Map<String, dynamic> toDocument() {
     return {
       'userId': userId,
       'email': email,
