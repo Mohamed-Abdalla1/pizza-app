@@ -4,7 +4,9 @@ import 'package:pizza/app.dart';
 import 'package:user_repository/user_repository.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized;
-  await Firebase.initializeApp;
-  runApp(MyApp(userRepository: FirebaseUserRepo(),));
+  await WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp(
+    userRepository: FirebaseUserRepo(),
+  ));
 }

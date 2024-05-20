@@ -27,6 +27,7 @@ class FirebaseUserRepo implements UserRepository {
           );
     } catch (e) {
       log(e.toString());
+      rethrow;
     }
   }
 
@@ -37,6 +38,7 @@ class FirebaseUserRepo implements UserRepository {
           email: email, password: password);
     } catch (e) {
       log(e.toString());
+      rethrow;
     }
   }
 
@@ -55,14 +57,14 @@ class FirebaseUserRepo implements UserRepository {
 
   @override
   Stream<MyUser?> get user {
-return _firebaseAuth.authStateChanges().flatMap((value) async*{
-  if (value == null) {
-    yield MyUser.empty;
-  }else{
-  yield await usersCollections.doc(value.uid).get().then((doc){
-     MyUser.fromEntity(UserEntity.fromDocument(doc.data()!));
+    return _firebaseAuth.authStateChanges().flatMap((value) async* {
+      if (value == null) {
+        yield MyUser.empty;
+      } else {
+        yield await usersCollections.doc(value.uid).get().then((doc) {
+          MyUser.fromEntity(UserEntity.fromDocument(doc.data()!));
+        });
+      }
     });
-  }
-});
   }
 }
