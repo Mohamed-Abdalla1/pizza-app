@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pizza/components/custom_align.dart';
+import 'package:pizza/screens/auth/views/sign_in_view.dart';
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -96,7 +97,7 @@ class _WelcomeViewState extends State<WelcomeView>
                           child: TabBarView(
                             controller: tabController,
                             children: [
-                              Container(),
+                               SignInView(),
                               Container(),
                             ],
                           ),
