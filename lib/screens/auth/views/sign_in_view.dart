@@ -35,6 +35,7 @@ class _SignInViewState extends State<SignInView> {
               prefixIcon: const Icon(CupertinoIcons.mail_solid),
               obscureText: false,
               hintText: 'Email',
+              errorText: _errorMsg,
               validator: (val) {
                 if (val!.isEmpty) {
                   return 'please fill in this field';
