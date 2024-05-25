@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza/blocs/authentication/authentication_bloc.dart';
 import 'package:pizza/components/custom_align.dart';
+import 'package:pizza/screens/auth/blocs/sign_in/sign_in_bloc.dart';
+import 'package:pizza/screens/auth/blocs/sign_up/sign_up_bloc.dart';
 import 'package:pizza/screens/auth/views/sign_in_view.dart';
 import 'package:pizza/screens/auth/views/sign_up_view.dart';
 
@@ -57,7 +61,7 @@ class _WelcomeViewState extends State<WelcomeView>
               Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.8,
+                    height: MediaQuery.of(context).size.height / 1.7,
                     child: Column(
                       children: [
                         Padding(
@@ -98,8 +102,19 @@ class _WelcomeViewState extends State<WelcomeView>
                           child: TabBarView(
                             controller: tabController,
                             children: [
-                              SignInView(),
-                              SignUpView(),
+                              BlocProvider<SignInBloc>(
+                                create: (context) => SignInBloc(
+                                     context
+                                        .read<AuthenticationBloc>()
+                                        .userRepository),
+                                child: SignInView(),
+                              ),
+                              BlocProvider<SignUpBloc>(
+                                  create: (context) => SignUpBloc(
+                                      context
+                                          .read<AuthenticationBloc>()
+                                          .userRepository),
+                                  child: SignUpView()),
                             ],
                           ),
                         )

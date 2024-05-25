@@ -2,8 +2,8 @@ import 'package:user_repository/src/entities/user_entity.dart';
 
 class MyUser {
    String userId;
-  final String email;
-  final String name;
+   String email;
+   String name;
   final bool cartIsActive;
 
   MyUser({

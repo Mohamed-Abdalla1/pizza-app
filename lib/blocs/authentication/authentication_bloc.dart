@@ -12,7 +12,7 @@ class AuthenticationBloc
   final UserRepository userRepository;
   late final StreamSubscription<MyUser?> _userSubscription;
   AuthenticationBloc({required this.userRepository})
-      : super(AuthenticationLoading()) {
+      : super(AuthenticationState.unknown()) {
     _userSubscription = userRepository.user.listen(
       (event) {
         add(AuthenticationChanged(myUser: event));
@@ -20,9 +20,9 @@ class AuthenticationBloc
     );
     on<AuthenticationChanged>((event, emit) {
       if (event.myUser != MyUser.empty) {
-        emit(AuthenticationSuccess(myUser: event.myUser!));
+        emit(AuthenticationState.authenticated( event.myUser!));
       } else {
-        emit(const AuthenticationFailure(errMessage: 'there was an Error'));
+        emit(const AuthenticationState.unauthenticated());
       }
     });
   }

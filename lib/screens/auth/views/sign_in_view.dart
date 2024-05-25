@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza/components/custom_textField.dart';
+import 'package:pizza/screens/auth/blocs/sign_in/sign_in_bloc.dart';
+import 'package:pizza/screens/home/views/home_view.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -20,103 +23,133 @@ class _SignInViewState extends State<SignInView> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: CustomTextfield(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              prefixIcon: const Icon(CupertinoIcons.mail_solid),
-              obscureText: false,
-              hintText: 'Email',
-              errorText: _errorMsg,
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return 'please fill in this field';
-                } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$')
-                    .hasMatch(val)) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
+    return BlocListener<SignInBloc, SignInState>(
+      listener: (context, state) {
+        if (state is SignInSuccess) {
+          setState(() {
+            signInRequired = false;
+          });
+        } else if (state is SignInLoading) {
+          setState(() {
+            signInRequired = true;
+          });
+        } else if (state is SignInFailure) {
+          setState(() {
+            signInRequired = false;
+            _errorMsg = 'Invalid email or password';
+          });
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: CustomTextfield(
-              controller: passwordController,
-              prefixIcon: const Icon(CupertinoIcons.lock_fill),
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: obscuredText,
-              hintText: 'Password',
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return 'please fill in this field';
-                } else if (!RegExp(
-                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~`)\%\-(_+=;:,.<>/?"[{\]}\|^]).{8,}$')
-                    .hasMatch(val)) {
-                  return 'Please enter a valid password';
-                }
-                return null;
-              },
-              suffixIcon: IconButton(
-                onPressed: () {
-                  obscuredText = !obscuredText;
-                  if (obscuredText) {
-                    setState(() {
-                      iconPassword = CupertinoIcons.eye_fill;
-                    });
-                  } else {
-                    setState(() {
-                      iconPassword = CupertinoIcons.eye_slash_fill;
-                    });
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: CustomTextfield(
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                obscureText: false,
+                hintText: 'Email',
+                errorText: _errorMsg,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'please fill in this field';
+                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+.)+[\w-]{2,4}$')
+                      .hasMatch(val)) {
+                    return 'Please enter a valid email';
                   }
+                  return null;
                 },
-                icon: Icon(iconPassword),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          !signInRequired
-              ? SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: TextButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                    },
-                    style: TextButton.styleFrom(
-                        elevation: 3.0,
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60),
-                        )),
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: CustomTextfield(
+                controller: passwordController,
+                prefixIcon: const Icon(CupertinoIcons.lock_fill),
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: obscuredText,
+                hintText: 'Password',
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'please fill in this field';
+                  } else if (!RegExp(
+                          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~`)\%\-(_+=;:,.<>/?"[{\]}\|^]).{8,}$')
+                      .hasMatch(val)) {
+                    return 'Please enter a valid password';
+                  }
+                  return null;
+                },
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    obscuredText = !obscuredText;
+                    if (obscuredText) {
+                      setState(() {
+                        iconPassword = CupertinoIcons.eye_fill;
+                      });
+                    } else {
+                      setState(() {
+                        iconPassword = CupertinoIcons.eye_slash_fill;
+                      });
+                    }
+                  },
+                  icon: Icon(iconPassword),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            !signInRequired
+                ? SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: TextButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<SignInBloc>().add(
+                                SigninRequred(
+                                    email: emailController.text,
+                                    password: passwordController.text),
+                              );
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const HomeView(),
+                          //   ),
+                          // );
+                        }
+                      },
+                      style: TextButton.styleFrom(
+                          elevation: 3.0,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60),
+                          )),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              : const CircularProgressIndicator(),
-        ],
+                  )
+                : const CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }
