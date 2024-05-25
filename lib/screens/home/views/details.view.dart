@@ -46,8 +46,8 @@ class DetailsView extends StatelessWidget {
                       color: Colors.grey, offset: Offset(3, 3), blurRadius: 5)
                 ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     Row(
@@ -91,7 +91,40 @@ class DetailsView extends StatelessWidget {
                     SizedBox(
                       height: 12,
                     ),
-                    MyMacro()
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyMacro(
+                          icon: FontAwesomeIcons.fire,
+                          title: 'Calories',
+                          value: 38,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MyMacro(
+                          icon: FontAwesomeIcons.dumbbell,
+                          title: 'Protien',
+                          value: 32,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MyMacro(
+                          icon: FontAwesomeIcons.oilWell,
+                          title: 'Fats',
+                          value: 21,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MyMacro(
+                          icon: FontAwesomeIcons.breadSlice,
+                          title: 'Carbs',
+                          value: 38,
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
