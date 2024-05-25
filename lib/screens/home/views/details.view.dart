@@ -46,7 +46,7 @@ class DetailsView extends StatelessWidget {
                       color: Colors.grey, offset: Offset(3, 3), blurRadius: 5)
                 ],
               ),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                   children: [
@@ -124,7 +124,29 @@ class DetailsView extends StatelessWidget {
                           value: 38,
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              elevation: 3.0,
+                              backgroundColor: Colors.black,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          child: const Text(
+                            "Buy Now",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600),
+                          )),
+                    ),
                   ],
                 ),
               ),
