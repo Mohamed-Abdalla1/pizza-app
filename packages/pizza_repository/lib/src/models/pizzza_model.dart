@@ -1,6 +1,6 @@
-import 'dart:math';
 
 import '../entities/entity.dart';
+import 'macros.dart';
 
 class PizzaModel {
   String pizzaId;

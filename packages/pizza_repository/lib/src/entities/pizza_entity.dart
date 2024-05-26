@@ -1,3 +1,7 @@
+import 'package:pizza_repository/src/entities/marcos.entity.dart';
+
+import '../models/macros.dart';
+
 class PizzaEntity {
     String pizzaId;
   String name;
@@ -44,7 +48,7 @@ class PizzaEntity {
       price: doc['price'],
       discount: doc['discount'],
       desc: doc['desc'],
-      macros: Marcos.fromEntity(Marcos.fromDocument(doc['marcos'])),
+      macros: Macros.fromEntity(MacrosEntity.fromDocument(doc['marcos'])),
     );
   }
 }
