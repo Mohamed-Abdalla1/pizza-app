@@ -43,15 +43,15 @@ class HomeView extends StatelessWidget {
               icon: const Icon(Icons.login)),
         ],
       ),
-      body: SizedBox(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Flexible(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
-              childAspectRatio: 7 / 16,
+              crossAxisSpacing: 6,
+              mainAxisSpacing: 6,
+              childAspectRatio: 5 / 11,
             ),
             itemCount: 6,
             itemBuilder: (context, index) {
