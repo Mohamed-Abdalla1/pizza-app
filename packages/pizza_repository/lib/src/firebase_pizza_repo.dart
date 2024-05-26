@@ -11,6 +11,7 @@ import 'pizza_repo.dart';
 class FirebasePizzaRepo implements PizzaRepo {
   final pizzaCollection = FirebaseFirestore.instance.collection('pizzas');
 
+  @override
   Future<List<PizzaModel>> getPizzas() async {
     try {
       return await pizzaCollection.get().then((value) => value.docs
