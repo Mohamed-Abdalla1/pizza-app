@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import '../entities/entity.dart';
+
 class PizzaModel {
   String pizzaId;
   String name;
