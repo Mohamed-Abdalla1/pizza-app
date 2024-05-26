@@ -6,3 +6,5 @@ sealed class GetPizzasEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetPizzas extends GetPizzasEvent{}

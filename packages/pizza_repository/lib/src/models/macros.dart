@@ -1,6 +1,7 @@
 
 
-import 'package:pizza_repository/src/entities/marcos.entity.dart';
+
+import '../entities/marcos.entity.dart';
 
 class Macros {
    int calories;
