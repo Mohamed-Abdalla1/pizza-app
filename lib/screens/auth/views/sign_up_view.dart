@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pizza/components/custom_textField.dart';
 import 'package:pizza/screens/auth/blocs/sign_up/sign_up_bloc.dart';
+import 'package:pizza/screens/home/blocs/get_pizzas/get_pizzas_bloc.dart';
+import 'package:pizza_repository/pizza_repository.dart';
 import 'package:user_repository/user_repository.dart';
+
+import '../../home/views/home_view.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -35,6 +39,14 @@ class _SignUpViewState extends State<SignUpView> {
         if (state is SignUpsuccess) {
           setState(() {
             signInRequired = false;
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => GetPizzasBloc(FirebasePizzaRepo()),
+                  child: const HomeView(),
+                ),
+              ),
+            );
           });
         } else if (state is SignUpLoading) {
           setState(() {

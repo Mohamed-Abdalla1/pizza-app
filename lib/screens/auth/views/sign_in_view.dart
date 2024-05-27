@@ -28,6 +28,11 @@ class _SignInViewState extends State<SignInView> {
         if (state is SignInSuccess) {
           setState(() {
             signInRequired = false;
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const HomeView(),
+              ),
+            );
           });
         } else if (state is SignInLoading) {
           setState(() {
@@ -119,11 +124,6 @@ class _SignInViewState extends State<SignInView> {
                                     email: emailController.text,
                                     password: passwordController.text),
                               );
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const HomeView(),
-                          //   ),
-                          // );
                         }
                       },
                       style: TextButton.styleFrom(

@@ -30,9 +30,8 @@ class DetailsView extends StatelessWidget {
                       blurRadius: 5,
                     ),
                   ],
-                  image: DecorationImage(
-                      image: NetworkImage(pizza.image ??
-                         ''))),
+                  image:
+                      DecorationImage(image: NetworkImage(pizza.image ?? ''))),
             ),
             const SizedBox(
               height: 30,
@@ -68,14 +67,14 @@ class DetailsView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "\$ ${pizza.discount} :00",
+                                  '\$ ${pizza.price - (pizza.price * (pizza.discount) / 100)}',
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.blueAccent),
                                 ),
                                 Text(
-                                  "\$  ${pizza.price} :00",
+                                  "\$  ${pizza.price}",
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,

@@ -182,7 +182,7 @@ class _HomeViewState extends State<HomeView> {
                                 Row(
                                   children: [
                                     Text(
-                                      '\$ ${state.pizzaModel[index].discount}',
+                                      '\$ ${state.pizzaModel[index].price - (state.pizzaModel[index].price * (state.pizzaModel[index].discount) / 100)}',
                                       style: const TextStyle(
                                         color: Colors.blue,
                                         fontSize: 16,
