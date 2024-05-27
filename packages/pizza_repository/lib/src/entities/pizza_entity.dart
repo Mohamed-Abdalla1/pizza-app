@@ -3,12 +3,12 @@ import 'package:pizza_repository/src/entities/marcos.entity.dart';
 import '../models/macros.dart';
 
 class PizzaEntity {
-    String pizzaId;
-  String name;
-  String image;
+ final String? pizzaId;
+ final String? name;
+ final String? image;
   bool isVeg;
   int spicy;
-  String desc;
+ final String? desc;
   int price;
   int discount;
   Macros macros;
@@ -24,9 +24,9 @@ class PizzaEntity {
     required this.macros,
   });
 
-  Map<String, dynamic> toDocument() {
+  Map<String, Object?> toDocument() {
     return {
-        'pizzaId': pizzaId,
+      'pizzaId': pizzaId,
       'name': name,
       'image': image,
       'isVeg': isVeg,
@@ -38,7 +38,7 @@ class PizzaEntity {
     };
   }
 
- static PizzaEntity fromDocument(Map<String, dynamic> doc) {
+  static PizzaEntity fromDocument(Map<String, dynamic> doc) {
     return PizzaEntity(
       pizzaId: doc['pizzaId'],
       name: doc['name'],
@@ -48,8 +48,7 @@ class PizzaEntity {
       price: doc['price'],
       discount: doc['discount'],
       desc: doc['desc'],
-      macros: Macros.fromEntity(MacrosEntity.fromDocument(doc['marcos'])),
+      macros: Macros.fromEntity(MacrosEntity.fromDocument(doc['macros'])),
     );
   }
 }
-

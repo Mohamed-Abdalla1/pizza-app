@@ -1,20 +1,21 @@
 
+
 import '../entities/entity.dart';
-import 'macros.dart';
+import 'models.dart';
 
 class PizzaModel {
-  String pizzaId;
-  String name;
-  String image;
-  bool isVeg;
-  int spicy;
-  String desc;
-  int price;
-  int discount;
-  Macros macros;
+final  String? pizzaId;
+final  String? name;
+final  String? image;
+final  bool isVeg;
+final  int spicy;
+final  String? desc;
+ final int price;
+ final int discount;
+final  Macros macros;
   PizzaModel({
-    required this.pizzaId,
-    required this.name,
+   required  this.pizzaId,
+  required   this.name,
     required this.image,
     required this.isVeg,
     required this.spicy,

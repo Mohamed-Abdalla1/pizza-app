@@ -9,7 +9,7 @@ class MacrosEntity {
       required this.fat,
       required this.carbs});
 
-  Map<String, dynamic> toDocument() {
+  Map<String, Object?> toDocument() {
     return {
       'calories': calories,
       'proteins': proteins,

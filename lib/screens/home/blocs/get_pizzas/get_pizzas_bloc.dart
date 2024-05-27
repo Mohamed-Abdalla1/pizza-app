@@ -13,7 +13,7 @@ class GetPizzasBloc extends Bloc<GetPizzasEvent, GetPizzasState> {
       try {
         List<PizzaModel> pizzas = await _pizzaRepo.getPizzas();
         emit(GetPizzasSuccess(pizzaModel: pizzas));
-      } catch (e) {
+      } catch (e) { 
         emit(GetPizzasFailure());
       }
     });

@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pizza/components/macro.dart';
+import 'package:pizza_repository/pizza_repository.dart';
 
 class DetailsView extends StatelessWidget {
-  const DetailsView({super.key});
-
+  const DetailsView({super.key, required this.pizza});
+  final PizzaModel pizza;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +30,9 @@ class DetailsView extends StatelessWidget {
                       blurRadius: 5,
                     ),
                   ],
-                  image:
-                      const DecorationImage(image: AssetImage('assets/5.png'))),
+                  image: DecorationImage(
+                      image: NetworkImage(pizza.image ??
+                         ''))),
             ),
             const SizedBox(
               height: 30,
@@ -47,7 +47,7 @@ class DetailsView extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     Row(
@@ -56,8 +56,8 @@ class DetailsView extends StatelessWidget {
                         Expanded(
                             flex: 2,
                             child: Text(
-                              'Truffle Temptation Extravaganeza',
-                              style: TextStyle(
+                              pizza.name!,
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             )),
                         Expanded(
@@ -68,15 +68,15 @@ class DetailsView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "\$12.00",
-                                  style: TextStyle(
+                                  "\$ ${pizza.discount} :00",
+                                  style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.blueAccent),
                                 ),
                                 Text(
-                                  "\$16.00",
-                                  style: TextStyle(
+                                  "\$  ${pizza.price} :00",
+                                  style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.grey,
@@ -88,7 +88,7 @@ class DetailsView extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     Row(
@@ -97,31 +97,31 @@ class DetailsView extends StatelessWidget {
                         MyMacro(
                           icon: FontAwesomeIcons.fire,
                           title: 'Calories',
-                          value: 38,
+                          value: pizza.macros.calories,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         MyMacro(
                           icon: FontAwesomeIcons.dumbbell,
                           title: 'Protien',
-                          value: 32,
+                          value: pizza.macros.proteins,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         MyMacro(
                           icon: FontAwesomeIcons.oilWell,
                           title: 'Fats',
-                          value: 21,
+                          value: pizza.macros.fat,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         MyMacro(
                           icon: FontAwesomeIcons.breadSlice,
                           title: 'Carbs',
-                          value: 38,
+                          value: pizza.macros.carbs,
                         ),
                       ],
                     ),
